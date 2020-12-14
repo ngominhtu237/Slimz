@@ -14,7 +14,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp" >
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -22,42 +23,45 @@
                 android:layout_height="50dp"
                 android:background="?attr/colorPrimary"
                 app:contentInsetLeft="0dp"
-                app:contentInsetStartWithNavigation="0dp">
-
-            </android.support.v7.widget.Toolbar>
+                app:contentInsetStartWithNavigation="0dp" />
 
             <ImageButton
                 android:id="@+id/btBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="10dp"
                 android:layout_centerVertical="true"
-                android:background="@mipmap/icon_back_v2"/>
+                android:padding="8dp"
+                android:src="@mipmap/icon_back_v2"
+                android:background="@drawable/ripple_bg"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/tvWordName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/btBack"
-                android:layout_marginLeft="10dp"
-                android:padding="5dp"
-                android:text="congrat"
-                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/btBack"
+                android:text="Sample"
                 android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="italic|bold"
                 android:shadowColor="@color/accent_brown"
                 android:shadowDx="1"
                 android:shadowDy="1"
-                android:shadowRadius="2"/>
+                android:shadowRadius="2"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                tools:ignore="HardcodedText" />
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/btStar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="20dp"
-                android:layout_toLeftOf="@+id/btSearch"
+                android:layout_marginEnd="20dp"
+                android:layout_toStartOf="@+id/btSearch"
                 android:visibility="gone"
                 app:ico_background_color="@android:color/transparent"
                 app:ico_color="@color/white"
@@ -69,8 +73,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="20dp"
-                android:layout_toLeftOf="@+id/btSearch"
+                android:layout_marginEnd="20dp"
+                android:layout_toStartOf="@+id/btSearch"
                 android:visibility="gone"
                 app:ico_background_color="@android:color/transparent"
                 app:ico_color="@color/md_amber_600"
@@ -82,8 +86,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="20dp"
-                android:layout_toLeftOf="@+id/btSearch"
+                android:layout_marginEnd="20dp"
+                android:layout_toStartOf="@+id/btSearch"
                 android:visibility="gone"
                 app:ico_background_color="@android:color/transparent"
                 app:ico_color="@color/md_blue_500"
@@ -95,8 +99,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="20dp"
-                android:layout_toLeftOf="@+id/btSearch"
+                android:layout_marginEnd="20dp"
+                android:layout_toStartOf="@+id/btSearch"
                 android:visibility="gone"
                 app:ico_background_color="@android:color/transparent"
                 app:ico_color="@color/md_deep_orange_A400"
@@ -108,9 +112,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="20dp"
-                android:layout_alignParentRight="true"
-                android:background="@mipmap/icon_search"/>
+                android:layout_marginEnd="20dp"
+                android:layout_alignParentEnd="true"
+                android:background="@mipmap/icon_search"
+                tools:ignore="ContentDescription" />
 
         </RelativeLayout>
 

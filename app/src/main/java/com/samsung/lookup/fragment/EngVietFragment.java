@@ -20,6 +20,7 @@ import android.webkit.WebViewClient;
 import com.samsung.lookup.R;
 import com.samsung.lookup.WordDetailsActivity;
 import com.samsung.lookup.data.DatabaseAccess;
+import com.samsung.lookup.fragment.base.BaseFragment;
 import com.samsung.lookup.model.Word;
 
 import org.jsoup.Jsoup;
@@ -32,15 +33,13 @@ import java.io.InputStream;
 /**
  * A quick_translate {@link Fragment} subclass.
  */
-public class EngVietFragment extends Fragment {
+public class EngVietFragment extends BaseFragment {
 
     private WebView mWebViewDetails;
     private DatabaseAccess databaseAccess;
-    private String receivedWordName;
-    private Word word;
 
     public EngVietFragment() {
-        databaseAccess = DatabaseAccess.getInstance(getActivity());
+        databaseAccess = DatabaseAccess.getInstance(mActivity);
         databaseAccess.open();
     }
 
@@ -49,14 +48,14 @@ public class EngVietFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    @SuppressLint("JavascriptInterface")
+    @SuppressLint({"JavascriptInterface", "SetJavaScriptEnabled"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_eng_viet, container, false);
         mWebViewDetails = v.findViewById(R.id.tvWordDetails);
         mWebViewDetails.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        Intent intent = getActivity().getIntent();
+        Intent intent = mActivity.getIntent();
 
         // FRAGMENT
 //        if(word == null && getArguments() != null) {
@@ -64,11 +63,11 @@ public class EngVietFragment extends Fragment {
 //        } else {
 //            word = (Word) intent.getSerializableExtra("word_detail");
 //        }
-        receivedWordName = intent.getStringExtra("wordNameSend");
+        String receivedWordName = intent.getStringExtra("wordFromActivity");
         if(receivedWordName == null) {
             receivedWordName = intent.getStringExtra("resendWord");
         }
-        word = databaseAccess.getWord(receivedWordName);
+        Word word = databaseAccess.getWord(receivedWordName);
 
         String result = word.getDetails().replaceAll("_", "'");
         result = result.replaceAll("\\\\r\\\\n", "");
@@ -100,8 +99,9 @@ public class EngVietFragment extends Fragment {
             @JavascriptInterface           // For API 17+
             public void performClick(String openedWord) {
                 // Activity
-                Intent intent = new Intent(getActivity(), WordDetailsActivity.class);
-                intent.putExtra("wordSendFromFragment", openedWord);
+                mActivity.finish();
+                Intent intent = new Intent(mActivity, WordDetailsActivity.class);
+                intent.putExtra("wordFromFragment", openedWord);
                 startActivity(intent);
 
                 // FRAGMENT
@@ -125,7 +125,7 @@ public class EngVietFragment extends Fragment {
             @Override
             public void onPageFinished(WebView view, String url) {
                 injectCSS();
-                injectScriptFile(mWebViewDetails, "script.js");
+                injectScriptFile(mWebViewDetails);
 
 //                tvWordDetails.loadUrl(
 //                        "javascript:(function() { "
@@ -149,7 +149,7 @@ public class EngVietFragment extends Fragment {
     // Append stylesheet to document head
     private void injectCSS() {
         try {
-            InputStream inputStream = getActivity().getAssets().open("style.css");
+            InputStream inputStream = mActivity.getAssets().open("style.css");
             byte[] buffer = new byte[inputStream.available()];
             inputStream.read(buffer);
             inputStream.close();
@@ -167,10 +167,10 @@ public class EngVietFragment extends Fragment {
         }
     }
 
-    private void injectScriptFile(WebView view, String scriptFile) {
+    private void injectScriptFile(WebView view) {
         InputStream input;
         try {
-            input = getActivity().getAssets().open(scriptFile);
+            input = mActivity.getAssets().open("script.js");
             byte[] buffer = new byte[input.available()];
             input.read(buffer);
             input.close();

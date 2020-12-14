@@ -98,7 +98,7 @@ public class HistoryWordActivity extends AppCompatActivity {
 
     public void openWord(String wordName) {
         Intent intent = new Intent(this, WordDetailsActivity.class);
-        intent.putExtra("wordNameSend", wordName);
+        intent.putExtra("wordFromActivity", wordName);
         startActivity(intent);
     }
 

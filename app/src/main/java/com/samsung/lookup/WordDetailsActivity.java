@@ -8,6 +8,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
@@ -24,6 +25,9 @@ import com.samsung.lookup.fragment.EngVietFragment;
 import com.samsung.lookup.fragment.NoteFragment;
 import com.samsung.lookup.fragment.SynonymFragment;
 import com.samsung.lookup.fragment.TechnicalFragment;
+import com.samsung.lookup.fragment.stack.WordStack;
+
+import java.util.Arrays;
 
 public class WordDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -70,18 +74,24 @@ public class WordDetailsActivity extends AppCompatActivity implements View.OnCli
 
         Intent intent = getIntent();
         // From MainActivity
-        receivedWordName = intent.getStringExtra("wordNameSend");
+        receivedWordName = intent.getStringExtra("wordFromActivity");
 
         // From EngVietFragment
         if(receivedWordName == null) {
-            receivedWordName = intent.getStringExtra(("wordSendFromFragment"));
+            receivedWordName = intent.getStringExtra(("wordFromFragment"));
+            if (receivedWordName == null) {
+                receivedWordName = intent.getStringExtra(("wordFromStack"));
+            } else {
+                addToStack(receivedWordName);
+            }
             Intent i = getIntent();
             i.putExtra("resendWord", receivedWordName);
         }
-
         if(receivedWordName != null) {
             mSaveDB.addHistoryWord(this, receivedWordName);
+            addToStack(receivedWordName);
         }
+        Log.v("wordstack", String.valueOf(WordStack.stackOfWords));
 
         checkWordFavorite(receivedWordName);
 
@@ -91,6 +101,12 @@ public class WordDetailsActivity extends AppCompatActivity implements View.OnCli
         setupViewPager(mViewPager);
         mTabLayout = findViewById(R.id.tabs);
         mTabLayout.setupWithViewPager(mViewPager);
+    }
+
+    private void addToStack(String word) {
+        if (!WordStack.stackOfWords.contains(word)) {
+            WordStack.stackOfWords.add(receivedWordName);
+        }
     }
 
     private void checkWordFavorite(String receivedWordName) {
@@ -136,13 +152,20 @@ public class WordDetailsActivity extends AppCompatActivity implements View.OnCli
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+        int stackSize = WordStack.stackOfWords.size();
+        if(stackSize > 1) {
+            Intent intent = new Intent(this, WordDetailsActivity.class);
+            WordStack.stackOfWords.pop();
+            intent.putExtra("wordFromStack", WordStack.stackOfWords.peek());
+            startActivity(intent);
+        }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btBack:
-                finish();
+                onBackPressed();
                 break;
             case R.id.btStar:
                 // OPEN DIALOG CHOOSE COLOR

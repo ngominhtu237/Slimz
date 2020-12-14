@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
     public void startWordDetails(String wordName) {
         completeTextView.setText(wordName);
         Intent intent = new Intent(MainActivity.this, WordDetailsActivity.class);
-        intent.putExtra("wordNameSend", wordName);
+        intent.putExtra("wordFromActivity", wordName);
         startActivity(intent);
     }
 
