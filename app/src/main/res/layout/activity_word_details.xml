@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WordDetailsActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="?attr/colorPrimary"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStartWithNavigation="0dp">
+
+            </android.support.v7.widget.Toolbar>
+
+            <ImageButton
+                android:id="@+id/btBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/icon_back_v2"/>
+
+            <TextView
+                android:id="@+id/tvWordName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/btBack"
+                android:layout_marginLeft="10dp"
+                android:padding="5dp"
+                android:text="congrat"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="italic|bold"
+                android:shadowColor="@color/accent_brown"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"/>
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/btStar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@+id/btSearch"
+                android:visibility="gone"
+                app:ico_background_color="@android:color/transparent"
+                app:ico_color="@color/white"
+                app:ico_icon="@string/faw_star_o"
+                app:ico_size="25dp"/>
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/btStarYellow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@+id/btSearch"
+                android:visibility="gone"
+                app:ico_background_color="@android:color/transparent"
+                app:ico_color="@color/md_amber_600"
+                app:ico_icon="@string/faw_star"
+                app:ico_size="25dp"/>
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/btStarBlue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@+id/btSearch"
+                android:visibility="gone"
+                app:ico_background_color="@android:color/transparent"
+                app:ico_color="@color/md_blue_500"
+                app:ico_icon="@string/faw_star"
+                app:ico_size="25dp"/>
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/btStarPink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@+id/btSearch"
+                android:visibility="gone"
+                app:ico_background_color="@android:color/transparent"
+                app:ico_color="@color/md_deep_orange_A400"
+                app:ico_icon="@string/faw_star"
+                app:ico_size="25dp"/>
+
+            <ImageButton
+                android:id="@+id/btSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:background="@mipmap/icon_search"/>
+
+        </RelativeLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabTextColor="@color/md_light_background"
+            app:tabSelectedTextColor="@color/white"
+            app:tabIndicatorColor="@color/white"
+            app:tabIndicatorHeight="3dp"
+            app:tabMode="scrollable"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appbar_details"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
+</RelativeLayout>

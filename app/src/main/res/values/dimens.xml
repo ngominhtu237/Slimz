@@ -1,0 +1,13 @@
+<resources>
+    <dimen name="dimen_entry_in_dp">40dp</dimen>
+
+    <dimen name="ten_dp">10dp</dimen>
+    <dimen name="twenty_dp">20dp</dimen>
+    <dimen name="twenty_five_dp">25dp</dimen>
+    <dimen name="fifteen_dp">15dp</dimen>
+    <dimen name="eighteen_dp">18dp</dimen>
+    <dimen name="five_dp">5dp</dimen>
+    <dimen name="thirty_dp">30dp</dimen>
+    <dimen name="twenty_sp">20sp</dimen>
+    <dimen name="sixteen_sp">16sp</dimen>
+</resources>

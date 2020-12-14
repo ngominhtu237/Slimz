@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="title_list">
+        <item>Quick Translate</item>
+        <item>Recent Word</item>
+        <item>Word Mark</item>
+        <item>Translate Text</item>
+        <item>Important Words</item>
+        <item>Settings</item>
+        <item>Feedback</item>
+    </array>
+</resources>

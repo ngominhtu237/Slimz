@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/border_item"
+    android:layout_height="38dp">
+
+    <ImageView
+        android:id="@+id/iconSearchSuggest"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:background="@mipmap/search"
+        android:elevation="1dp" />
+
+    <ImageView
+        android:id="@+id/iconHistorySuggest"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:background="@mipmap/icon_history_gen"
+        android:elevation="1dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tvSuggestWord"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:textSize="15sp"
+        android:textColor="@color/md_grey_600"
+        android:layout_toStartOf="@id/iconArrowContainer"
+        android:paddingStart="35dp" />
+    <LinearLayout
+        android:id="@+id/iconArrowContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true">
+        <ImageView
+            android:id="@+id/iconArrow"
+            android:layout_width="13dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="center_vertical"
+            android:background="@mipmap/arrow"
+            android:elevation="1dp" />
+    </LinearLayout>
+
+</RelativeLayout>

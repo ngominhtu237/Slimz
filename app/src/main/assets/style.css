@@ -1,0 +1,51 @@
+/* title */
+
+/* #388E3C: xanh lá cây, #E91E63: hồng đỏ */
+p {
+    margin : 6px 6px 6px 0px;
+}
+
+i {
+    color: #388E3C;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 19px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Type Word: Tu Loai */
+ul > li > p > i {
+    color: black;
+    text-decoration: none;
+}
+
+/* meaning */
+
+ul > li > ul > li > font > p {
+    color: #E91E63;
+    font-size: 18px;
+}
+
+/* sentence example */
+ul > li > ul > li > ul > li {
+    margin-top: 5px;
+    margin-left: 25px;
+}
+
+ul > li > ul > li > ul > li > p {
+    color: #2E7D32;
+    font-size: 18px;
+}
+
+p > span {
+    text-decoration: underline;
+}
+
+body > ul > li > ul > li > p {
+    color: #651FFF;
+    padding-top: 10px;
+}

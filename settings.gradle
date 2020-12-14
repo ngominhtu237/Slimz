@@ -1,0 +1,2 @@
+include ':app', ':sqliteassethelper-2.0.1', ':circleimageview-2.1.0', ':recyclerview-animators-1.0.3', ':recyclerview-animators-2.3.0'
+include ':standOut'

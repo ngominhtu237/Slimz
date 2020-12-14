@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStartWithNavigation="0dp">
+
+            </android.support.v7.widget.Toolbar>
+
+            <TextView
+                android:id="@+id/toolbar_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:text="SLIMZ"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@+id/toolbar_logo"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/white">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/iconSearch"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:elevation="1dp"
+                    app:ico_background_color="@android:color/transparent"
+                    app:ico_color="@color/colorPrimary"
+                    app:ico_icon="@string/faw_search"/>
+
+                <ImageView
+                    android:id="@+id/ivHistorySuggest"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:elevation="1dp"
+                    android:background="@mipmap/icon_history_gen"
+                    android:visibility="gone"/>
+
+                <com.samsung.lookup.view.CustomAutoCompleteTextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/white"
+                    android:dropDownWidth="wrap_content"
+                    android:dropDownVerticalOffset="0.5dp"
+                    android:paddingStart="38dp"
+                    android:hint="Enter word..."
+                    android:paddingLeft="8dp"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColorHint="@color/md_light_dividers" />
+                <LinearLayout
+                    android:id="@+id/iconMicroContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true">
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/ivIconMicro"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:elevation="1dp"
+                        app:ico_background_color="@android:color/transparent"
+                        app:ico_color="@color/colorPrimary"
+                        app:ico_icon="@string/gmd_mic" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/iconDeleteContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true">
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/ivIconDeleteLetter"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="12dp"
+                        android:elevation="1dp"
+                        app:ico_background_color="@android:color/transparent"
+                        app:ico_color="@color/colorPrimary"
+                        app:ico_icon="@string/gmd_close"
+                        android:visibility="gone"/>
+                </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </android.support.design.widget.AppBarLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appbar"
+        android:background="@color/md_grey_300"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:paddingTop="5dp"
+            android:background="@color/md_grey_100"/>
+    </LinearLayout>
+</RelativeLayout>

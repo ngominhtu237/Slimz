@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/iconQuestion"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="@dimen/ten_dp"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/icon_bin_white"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/iconQuestion"
+            android:paddingTop="@dimen/ten_dp"
+            android:paddingRight="@dimen/ten_dp"
+            android:paddingBottom="@dimen/ten_dp"
+            android:layout_marginLeft="@dimen/five_dp"
+            android:text="Confirm"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/five_dp"
+        android:paddingLeft="@dimen/fifteen_dp"
+        android:paddingRight="@dimen/fifteen_dp"
+        android:paddingTop="@dimen/fifteen_dp"
+        android:text="Do you want to delete this word?"
+        android:textColor="@color/accent_black"
+        android:textSize="@dimen/sixteen_sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:text="@string/cancel"
+            android:textColor="@color/md_blue_grey_700" />
+
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:text="@string/delete"
+            android:textColor="@color/md_blue_grey_700" />
+
+    </LinearLayout>
+</LinearLayout>
