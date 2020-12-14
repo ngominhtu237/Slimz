@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         databaseAccess.open();
         mSaveDB = new SaveDB(this);
         mSaveDB.open();
-        customAutoCompWordAdapter = new CustomAutoCompWordAdapter(MainActivity.this, R.layout.item_layout, wordNameArr);
+        customAutoCompWordAdapter = new CustomAutoCompWordAdapter(MainActivity.this, R.layout.item_autocomplete_layout, wordNameArr);
         completeTextView.setThreshold(0);
         completeTextView.setAdapter(customAutoCompWordAdapter);
 

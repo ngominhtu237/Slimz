@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/border_item"
     android:layout_height="45dp">
 
-    <ImageView
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/iconSearchSuggest"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
-        android:background="@mipmap/search"
-        android:elevation="1dp" />
+        app:ico_color="@color/colorPrimary"
+        app:ico_icon="@string/gmd_search" />
 
-    <ImageView
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/iconHistorySuggest"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_alignParentStart="true"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
         android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
-        android:background="@mipmap/icon_history_gen"
-        android:elevation="1dp"
+        app:ico_color="@color/md_orange_400"
+        app:ico_icon="@string/gmd_history"
         android:visibility="gone"/>
 
     <TextView
@@ -32,23 +33,22 @@
         android:layout_centerVertical="true"
         android:gravity="center_vertical"
         android:textSize="16sp"
-        android:layout_toLeftOf="@id/iconArrowContainer"
-        android:text="name"
-        android:paddingStart="35dp" />
+        android:layout_toStartOf="@id/iconArrowContainer"
+        android:paddingStart="35dp"
+        tools:ignore="RtlSymmetry" />
     <LinearLayout
         android:id="@+id/iconArrowContainer"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true">
-        <ImageView
+        <android.support.v7.widget.AppCompatImageView
             android:id="@+id/iconArrow"
-            android:layout_width="15dp"
+            android:layout_width="14dp"
             android:layout_height="14dp"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="12dp"
             android:layout_gravity="center_vertical"
-            android:background="@mipmap/arrow"
-            android:elevation="1dp" />
+            android:background="@mipmap/arrow" />
     </LinearLayout>
 
 </RelativeLayout>

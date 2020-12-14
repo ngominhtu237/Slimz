@@ -15,16 +15,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 app:contentInsetLeft="0dp"
-                app:contentInsetStartWithNavigation="0dp">
-
-            </android.support.v7.widget.Toolbar>
+                app:contentInsetStartWithNavigation="0dp" />
 
             <TextView
                 android:id="@+id/toolbar_logo"
@@ -33,9 +30,9 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:padding="5dp"
-                android:text="SLIMZ"
+                android:text="@string/dictionary_name"
                 android:textColor="@color/white"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
             <RelativeLayout
@@ -50,25 +47,25 @@
 
                 <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/iconSearch"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentLeft="true"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:elevation="1dp"
-                    app:ico_background_color="@android:color/transparent"
                     app:ico_color="@color/colorPrimary"
-                    app:ico_icon="@string/faw_search"/>
+                    app:ico_icon="@string/gmd_search"/>
 
-                <ImageView
+                <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/ivHistorySuggest"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentLeft="true"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:elevation="1dp"
-                    android:background="@mipmap/icon_history_gen"
+                    app:ico_color="@color/accent_red"
+                    app:ico_icon="@string/gmd_history"
                     android:visibility="gone"/>
 
                 <com.samsung.lookup.view.CustomAutoCompleteTextView
@@ -80,11 +77,11 @@
                     android:dropDownWidth="wrap_content"
                     android:dropDownVerticalOffset="0.5dp"
                     android:paddingStart="38dp"
-                    android:hint="Enter word..."
-                    android:paddingLeft="8dp"
+                    android:hint="@string/work_placeholder"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:textColorHint="@color/md_light_dividers" />
+                    android:textColorHint="@color/md_light_dividers"
+                    tools:ignore="RtlSymmetry" />
                 <LinearLayout
                     android:id="@+id/iconMicroContainer"
                     android:layout_width="wrap_content"
@@ -92,14 +89,12 @@
                     android:layout_alignParentEnd="true">
                     <android.support.v7.widget.AppCompatImageView
                         android:id="@+id/ivIconMicro"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_centerVertical="true"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="10dp"
                         android:elevation="1dp"
-                        app:ico_background_color="@android:color/transparent"
                         app:ico_color="@color/colorPrimary"
                         app:ico_icon="@string/gmd_mic" />
                 </LinearLayout>
@@ -111,12 +106,11 @@
                     android:layout_alignParentEnd="true">
                     <android.support.v7.widget.AppCompatImageView
                         android:id="@+id/ivIconDeleteLetter"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_centerVertical="true"
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="12dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="12dp"
                         android:elevation="1dp"
                         app:ico_background_color="@android:color/transparent"
                         app:ico_color="@color/colorPrimary"
