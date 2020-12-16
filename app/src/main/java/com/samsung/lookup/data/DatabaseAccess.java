@@ -44,11 +44,11 @@ public class DatabaseAccess {
     }
 
     // Get suggest word from suggest character
-    public ArrayList<String> getWordNames(String stringSuggest){
+    public ArrayList<String> getWordNames(String stringSuggest, int limit){
         ArrayList<String> wordNameArr = new ArrayList<>();
 
         // Select All query
-        String selectQuery = "SELECT * from " + Constant.TABLE_NAME + " where " + COLUMN_WORDNAME + " LIKE \'" + stringSuggest + "%\' LIMIT 25";
+        String selectQuery = "SELECT * from " + Constant.TABLE_NAME + " where " + COLUMN_WORDNAME + " LIKE \'" + stringSuggest + "%\' LIMIT " + limit;
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {

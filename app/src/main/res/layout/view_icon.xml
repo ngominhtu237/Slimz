@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="44dp"
-    android:layout_height="44dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
     android:background="@drawable/bg_textview">
 
     <TextView
         android:id="@+id/tvFloatingIcon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="s"
+        android:text="S"
         android:gravity="center"
         android:textColor="@color/white"
         android:textStyle="italic|bold"
-        android:textSize="27sp" />
+        android:textSize="27sp"
+        tools:ignore="HardcodedText" />
 </RelativeLayout>

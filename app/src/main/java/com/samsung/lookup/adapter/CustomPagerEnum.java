@@ -5,10 +5,10 @@ import com.samsung.lookup.R;
 public enum CustomPagerEnum {
 
     ENGVIET(R.string.tab_engviet, R.layout.view_engviet),
-    TECHNICAL(R.string.tab_technical, R.layout.view_technical),
-    SYNONYM(R.string.tab_synonym, R.layout.view_synonym),
+//    TECHNICAL(R.string.tab_technical, R.layout.view_technical),
     ENGENG(R.string.tab_engeng, R.layout.view_engeng),
-    NOTE(R.string.tab_note, R.layout.view_note);
+    SYNONYM(R.string.tab_synonym, R.layout.view_synonym);
+//    NOTE(R.string.tab_note, R.layout.view_note);
 
     private int mTitleResId;
     private int mLayoutResId;
@@ -25,5 +25,4 @@ public enum CustomPagerEnum {
     public int getLayoutResId() {
         return mLayoutResId;
     }
-
 }

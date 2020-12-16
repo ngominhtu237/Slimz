@@ -338,7 +338,7 @@ public abstract class StandOutWindow extends Service {
 	}
 
 	// internal system services
-	WindowManager mWindowManager;
+	public WindowManager mWindowManager;
 	private NotificationManager mNotificationManager;
 	LayoutInflater mLayoutInflater;
 
@@ -777,15 +777,15 @@ public abstract class StandOutWindow extends Service {
 		}
 
 		// add default drop down items
-		items.add(new DropDownListItem(
-				android.R.drawable.ic_menu_close_clear_cancel, "Quit "
-						+ getAppName(), new Runnable() {
-
-					@Override
-					public void run() {
-						closeAll();
-					}
-				}));
+//		items.add(new DropDownListItem(
+//				android.R.drawable.ic_menu_close_clear_cancel, "Quit "
+//						+ getAppName(), new Runnable() {
+//
+//					@Override
+//					public void run() {
+//						closeAll();
+//					}
+//				}));
 
 		// turn item list into views in PopupWindow
 		LinearLayout list = new LinearLayout(this);

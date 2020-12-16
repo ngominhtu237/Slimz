@@ -18,13 +18,14 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.mikepenz.iconics.context.IconicsContextWrapper;
 import com.samsung.lookup.activity.HistoryWordActivity;
 import com.samsung.lookup.activity.MarkWordActivity;
-import com.samsung.lookup.adapter.CustomAutoCompWordAdapter;
+import com.samsung.lookup.adapter.CustomACWordAdapter;
 import com.samsung.lookup.adapter.CustomRecycleViewAdapter;
 import com.samsung.lookup.data.DatabaseAccess;
 import com.samsung.lookup.data.secondDB.SaveDB;
@@ -38,6 +39,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import wei.mark.standout.StandOutWindow;
+import wei.mark.standout.ui.Window;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     public final static int REQUEST_CODE = 113;
     private CustomAutoCompleteTextView completeTextView;
     private ArrayList<String> wordNameArr = new ArrayList<>();
-    private CustomAutoCompWordAdapter customAutoCompWordAdapter;
+    private CustomACWordAdapter customAutoCompWordAdapter;
     private CustomRecycleViewAdapter recycleViewAdapter;
     private DatabaseAccess databaseAccess;
     private SaveDB mSaveDB;
@@ -67,11 +69,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(isMyServiceRunning(QuickTranslateService.class)) {
-            // disable floating icon + kill service
-            Intent intent = new Intent(MainActivity.this, QuickTranslateService.class);
+        if(isMyServiceRunning(QuickTranslate.class)) {
+            Intent intent = new Intent(MainActivity.this, QuickTranslate.class);
             stopService(intent);
         }
+//        StandOutWindow
+//                .closeAll(MainActivity.this, QuickTranslate.class);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         mRecyclerView = findViewById(R.id.recycleView);
@@ -87,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         databaseAccess.open();
         mSaveDB = new SaveDB(this);
         mSaveDB.open();
-        customAutoCompWordAdapter = new CustomAutoCompWordAdapter(MainActivity.this, R.layout.item_autocomplete_layout, wordNameArr);
+        customAutoCompWordAdapter = new CustomACWordAdapter(MainActivity.this, R.layout.item_autocomplete_layout, wordNameArr);
         completeTextView.setThreshold(0);
         completeTextView.setAdapter(customAutoCompWordAdapter);
 
@@ -207,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
                     //finish();
                     StandOutWindow
                             .show(MainActivity.this, QuickTranslate.class, StandOutWindow.DEFAULT_ID);
+                    finish();
                 }
                 if(position == 1) {
                     startActivity(new Intent(MainActivity.this, HistoryWordActivity.class));
@@ -233,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Integer doInBackground(String... strings) {
             Log.v("onTextChanged", "word search: " + strings[0]);
-            wordNameArr = databaseAccess.getWordNames(strings[0]);
+            wordNameArr = databaseAccess.getWordNames(strings[0], 25);
             return null;
         }
 

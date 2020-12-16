@@ -23,8 +23,6 @@ public class CustomACQuickAdapter extends ArrayAdapter<String> {
     private ArrayList<String> mWordArrayList;
     private ArrayList<String> mWordArrayListAll;
     private int mLayoutResourceId;
-    private ImageView iconSearchSuggest, iconHistorySuggest;
-    private TextView tvSuggestWord;
     public boolean isNeedToChange;
 
     public CustomACQuickAdapter(@NonNull Context context, int resource, @NonNull ArrayList<String> wordArrayList) {
@@ -72,20 +70,20 @@ public class CustomACQuickAdapter extends ArrayAdapter<String> {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             v = inflater.inflate(mLayoutResourceId, parent, false);
         }
-        iconSearchSuggest = v.findViewById(R.id.iconSearchSuggest);
-        iconHistorySuggest = v.findViewById(R.id.iconHistorySuggest);
-        tvSuggestWord = v.findViewById(R.id.tvSuggestWord);
+        ImageView iconSearchSuggest = v.findViewById(R.id.iconSearchSuggest);
+        ImageView iconHistorySuggest = v.findViewById(R.id.iconHistorySuggest);
+        TextView tvSuggestWord = v.findViewById(R.id.tvSuggestWord);
         v.findViewById(R.id.iconArrowContainer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity) mContext).getCompleteTextView().setText(mWordArrayList.get(position));
-                ((MainActivity) mContext).runSearch(mWordArrayList.get(position));
+//                ((MainActivity) mContext).getCompleteTextView().setText(mWordArrayList.get(position));
+//                ((MainActivity) mContext).runSearch(mWordArrayList.get(position));
             }
         });
         tvSuggestWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //((MainActivity) mContext).startWordDetails(mWordArrayList.get(position));
+//                ((MainActivity) mContext).startWordDetails(mWordArrayList.get(position));
             }
         });
         iconSearchSuggest.setVisibility(isNeedToChange ? View.GONE : View.VISIBLE);

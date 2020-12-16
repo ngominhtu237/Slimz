@@ -384,7 +384,7 @@ public class QuickTranslateService extends Service implements View.OnTouchListen
 
         @Override
         protected Integer doInBackground(String... strings) {
-            wordNameArr = databaseAccess.getWordNames(strings[0]);
+            wordNameArr = databaseAccess.getWordNames(strings[0], 10);
             return null;
         }
 

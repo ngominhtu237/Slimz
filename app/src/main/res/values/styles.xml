@@ -25,4 +25,9 @@
         <item name="colorControlActivated">@color/md_cyan_500</item>
     </style>
 
+    <style name="FloatingWindowTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+
 </resources>

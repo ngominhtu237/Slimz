@@ -17,7 +17,7 @@ import com.samsung.lookup.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomAutoCompWordAdapter extends ArrayAdapter<String> {
+public class CustomACWordAdapter extends ArrayAdapter<String> {
 
     private Context mContext;
     private ArrayList<String> mWordArrayList;
@@ -27,7 +27,7 @@ public class CustomAutoCompWordAdapter extends ArrayAdapter<String> {
     private TextView tvSuggestWord;
     public boolean isNeedToChange;
 
-    public CustomAutoCompWordAdapter(@NonNull Context context, int resource, @NonNull ArrayList<String> wordArrayList) {
+    public CustomACWordAdapter(@NonNull Context context, int resource, @NonNull ArrayList<String> wordArrayList) {
         super(context, resource, wordArrayList);
         this.mContext = context;
         this.mLayoutResourceId = resource;
