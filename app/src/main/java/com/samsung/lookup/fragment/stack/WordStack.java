@@ -7,4 +7,10 @@ import java.util.Stack;
  */
 public class WordStack {
     public static Stack<String> stackOfWords = new Stack<>();
+
+    public static void addToStack(String word) {
+        if (!WordStack.stackOfWords.contains(word)) {
+            WordStack.stackOfWords.add(word);
+        }
+    }
 }

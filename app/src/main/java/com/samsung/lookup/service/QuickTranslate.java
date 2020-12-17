@@ -31,6 +31,7 @@ import com.samsung.lookup.adapter.CustomACQuickAdapter;
 import com.samsung.lookup.adapter.CustomPagerAdapter;
 import com.samsung.lookup.data.DatabaseAccess;
 import com.samsung.lookup.data.secondDB.SaveDB;
+import com.samsung.lookup.fragment.stack.WordStack;
 import com.samsung.lookup.model.Word;
 import com.samsung.lookup.utils.HtmlUtils;
 import com.samsung.lookup.view.CustomAutoCompleteTextView;
@@ -42,6 +43,7 @@ import wei.mark.standout.StandOutWindow;
 import wei.mark.standout.constants.StandOutFlags;
 import wei.mark.standout.ui.Window;
 
+import static com.samsung.lookup.fragment.stack.WordStack.addToStack;
 import static wei.mark.standout.ui.Window.WindowDataKeys.HEIGHT_BEFORE_MAXIMIZE;
 import static wei.mark.standout.ui.Window.WindowDataKeys.IS_MAXIMIZED;
 import static wei.mark.standout.ui.Window.WindowDataKeys.WIDTH_BEFORE_MAXIMIZE;
@@ -218,6 +220,8 @@ public class QuickTranslate extends StandOutWindow implements View.OnTouchListen
         Word word = databaseAccess.getWord(wordName);
         mCustomPagerAdapter.setEnViDetails(HtmlUtils.format(word).toString());
         mCustomPagerAdapter.notifyDataSetChanged();
+        mSaveDB.addHistoryWord(this, wordName);
+        addToStack(wordName);
         new Handler().post(new Runnable() {
             public void run() {
                 mAutoCompleteTextView.dismissDropDown();

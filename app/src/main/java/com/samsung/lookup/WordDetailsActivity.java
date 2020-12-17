@@ -29,6 +29,8 @@ import com.samsung.lookup.fragment.stack.WordStack;
 
 import java.util.Arrays;
 
+import static com.samsung.lookup.fragment.stack.WordStack.addToStack;
+
 public class WordDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TabLayout mTabLayout;
@@ -101,12 +103,6 @@ public class WordDetailsActivity extends AppCompatActivity implements View.OnCli
         setupViewPager(mViewPager);
         mTabLayout = findViewById(R.id.tabs);
         mTabLayout.setupWithViewPager(mViewPager);
-    }
-
-    private void addToStack(String word) {
-        if (!WordStack.stackOfWords.contains(word)) {
-            WordStack.stackOfWords.add(receivedWordName);
-        }
     }
 
     private void checkWordFavorite(String receivedWordName) {
