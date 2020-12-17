@@ -158,6 +158,8 @@ public class WordDetailsActivity extends AppCompatActivity implements View.OnCli
             WordStack.stackOfWords.pop();
             intent.putExtra("wordFromStack", WordStack.stackOfWords.peek());
             startActivity(intent);
+        } else if (stackSize == 1) {
+            WordStack.stackOfWords.pop();
         }
     }
 
@@ -168,7 +170,6 @@ public class WordDetailsActivity extends AppCompatActivity implements View.OnCli
                 onBackPressed();
                 break;
             case R.id.btStar:
-                // OPEN DIALOG CHOOSE COLOR
                 openDialogColor();
                 break;
             case R.id.btStarYellow:

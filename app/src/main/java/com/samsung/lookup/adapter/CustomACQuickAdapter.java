@@ -11,7 +11,6 @@ import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.samsung.lookup.MainActivity;
 import com.samsung.lookup.R;
 
 import java.util.ArrayList;
@@ -24,10 +23,12 @@ public class CustomACQuickAdapter extends ArrayAdapter<String> {
     private ArrayList<String> mWordArrayListAll;
     private int mLayoutResourceId;
     public boolean isNeedToChange;
+    private WordDetailsInterface mWordDetailsInterface;
 
-    public CustomACQuickAdapter(@NonNull Context context, int resource, @NonNull ArrayList<String> wordArrayList) {
+    public CustomACQuickAdapter(@NonNull Context context, WordDetailsInterface wordDetailsInterface, int resource, @NonNull ArrayList<String> wordArrayList) {
         super(context, resource, wordArrayList);
         this.mContext = context;
+        this.mWordDetailsInterface = wordDetailsInterface;
         this.mLayoutResourceId = resource;
         this.mWordArrayList = new ArrayList<>(wordArrayList);
         this.mWordArrayListAll = new ArrayList<>(wordArrayList);
@@ -76,20 +77,23 @@ public class CustomACQuickAdapter extends ArrayAdapter<String> {
         v.findViewById(R.id.iconArrowContainer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                ((MainActivity) mContext).getCompleteTextView().setText(mWordArrayList.get(position));
-//                ((MainActivity) mContext).runSearch(mWordArrayList.get(position));
+                mWordDetailsInterface.generateWord(mWordArrayList.get(position));
             }
         });
         tvSuggestWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                ((MainActivity) mContext).startWordDetails(mWordArrayList.get(position));
+                mWordDetailsInterface.openWord(mWordArrayList.get(position));
             }
         });
         iconSearchSuggest.setVisibility(isNeedToChange ? View.GONE : View.VISIBLE);
         iconHistorySuggest.setVisibility(isNeedToChange ? View.VISIBLE : View.GONE);
         tvSuggestWord.setText(mWordArrayList.get(position));
         return v;
+    }
+    public interface WordDetailsInterface {
+        void openWord(String word);
+        void generateWord(String word);
     }
 
     private Filter wordFilter = new Filter() {

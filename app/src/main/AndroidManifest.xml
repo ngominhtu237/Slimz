@@ -38,11 +38,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-        <service
-            android:name=".service.QuickTranslateService"
-            android:enabled="true"
-            android:exported="true" />
-
         <service android:name=".service.QuickTranslate" />
     </application>
 

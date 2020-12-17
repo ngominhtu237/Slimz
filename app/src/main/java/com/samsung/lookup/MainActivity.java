@@ -31,6 +31,7 @@ import com.samsung.lookup.data.DatabaseAccess;
 import com.samsung.lookup.data.secondDB.SaveDB;
 import com.samsung.lookup.event.RecyclerClick_Listener;
 import com.samsung.lookup.event.RecyclerTouchListener;
+import com.samsung.lookup.fragment.stack.WordStack;
 import com.samsung.lookup.service.QuickTranslate;
 import com.samsung.lookup.service.QuickTranslateService;
 import com.samsung.lookup.view.CustomAutoCompleteTextView;

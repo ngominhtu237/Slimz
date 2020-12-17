@@ -2,15 +2,15 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="50dp"
-    android:layout_height="50dp"
+    android:layout_width="45dp"
+    android:layout_height="45dp"
     android:background="@drawable/bg_textview">
 
     <TextView
         android:id="@+id/tvFloatingIcon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="S"
+        android:text="丂"
         android:gravity="center"
         android:textColor="@color/white"
         android:textStyle="italic|bold"

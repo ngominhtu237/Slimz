@@ -34,7 +34,7 @@ import com.samsung.lookup.view.CustomAutoCompleteTextView;
 
 import java.util.ArrayList;
 
-public class QuickTranslateService extends Service implements View.OnTouchListener, View.OnClickListener {
+public class QuickTranslateService extends Service implements View.OnTouchListener, View.OnClickListener, CustomACQuickAdapter.WordDetailsInterface {
     public static final int WIDTH_FLOAT_WINDOW = 300; // dp?
     public static final int HEIGHT_FLOAT_WINDOW = 220;
     private WindowManager mWindowManager;
@@ -96,8 +96,8 @@ public class QuickTranslateService extends Service implements View.OnTouchListen
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        mCustomPagerAdapter = new CustomPagerAdapter(getApplicationContext());
-        viewPager.setAdapter(mCustomPagerAdapter);
+//        mCustomPagerAdapter = new CustomPagerAdapter(getApplicationContext());
+//        viewPager.setAdapter(mCustomPagerAdapter);
 
     }
 
@@ -116,7 +116,7 @@ public class QuickTranslateService extends Service implements View.OnTouchListen
         mTabLayout = view.findViewById(R.id.tabs);
         mTabLayout.setupWithViewPager(mViewPager);
         mAutoCompleteTextView = view.findViewById(R.id.searchview);
-        customACQuickAdapter = new CustomACQuickAdapter(getApplicationContext(), R.layout.item_layout_quick, wordNameArr);
+        customACQuickAdapter = new CustomACQuickAdapter(getApplicationContext(), this, R.layout.item_layout_quick, wordNameArr);
         mAutoCompleteTextView.setAdapter(customACQuickAdapter);
         mAutoCompleteTextView.addTextChangedListener(new TextWatcher() {
 
@@ -357,6 +357,16 @@ public class QuickTranslateService extends Service implements View.OnTouchListen
         }
         mWindowManager.addView(mFloatingView, mFloatingWindowViewParams);
         state = STATE_FLOATING_WINDOW;
+    }
+
+    @Override
+    public void openWord(String name) {
+
+    }
+
+    @Override
+    public void generateWord(String word) {
+
     }
 
     private class SingleTapConfirm extends GestureDetector.SimpleOnGestureListener {

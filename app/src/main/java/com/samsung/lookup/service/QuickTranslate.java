@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
@@ -30,6 +31,8 @@ import com.samsung.lookup.adapter.CustomACQuickAdapter;
 import com.samsung.lookup.adapter.CustomPagerAdapter;
 import com.samsung.lookup.data.DatabaseAccess;
 import com.samsung.lookup.data.secondDB.SaveDB;
+import com.samsung.lookup.model.Word;
+import com.samsung.lookup.utils.HtmlUtils;
 import com.samsung.lookup.view.CustomAutoCompleteTextView;
 
 import java.util.ArrayList;
@@ -45,12 +48,12 @@ import static wei.mark.standout.ui.Window.WindowDataKeys.WIDTH_BEFORE_MAXIMIZE;
 import static wei.mark.standout.ui.Window.WindowDataKeys.X_BEFORE_MAXIMIZE;
 import static wei.mark.standout.ui.Window.WindowDataKeys.Y_BEFORE_MAXIMIZE;
 
-public class QuickTranslate extends StandOutWindow implements View.OnTouchListener {
+public class QuickTranslate extends StandOutWindow implements View.OnTouchListener, CustomACQuickAdapter.WordDetailsInterface {
 
     private static final String TAG = "QuickTranslate";
 
-    private static final int OPENED_WIDTH = 800;
-    private static final int OPENED_HEIGHT = 650;
+    private static final int OPENED_WIDTH = 1000;
+    private static final int OPENED_HEIGHT = 850;
 
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
@@ -154,7 +157,7 @@ public class QuickTranslate extends StandOutWindow implements View.OnTouchListen
         mTabLayout = view.findViewById(R.id.tabs);
         mTabLayout.setupWithViewPager(mViewPager);
         mAutoCompleteTextView = view.findViewById(R.id.searchview);
-        customACQuickAdapter = new CustomACQuickAdapter(getApplicationContext(), R.layout.item_layout_quick, wordNameArr);
+        customACQuickAdapter = new CustomACQuickAdapter(getApplicationContext(), this, R.layout.item_layout_quick, wordNameArr);
         mAutoCompleteTextView.setAdapter(customACQuickAdapter);
         mAutoCompleteTextView.addTextChangedListener(new TextWatcher() {
 
@@ -177,7 +180,7 @@ public class QuickTranslate extends StandOutWindow implements View.OnTouchListen
                 if (mAutoCompleteTextView.getText().length() > 0) {
                     customACQuickAdapter.isNeedToChange = false;
                 } else {
-                    mListHistoryWord = mSaveDB.getHistoryWord(50);
+                    mListHistoryWord = mSaveDB.getHistoryWord(10);
                     if (mListHistoryWord.size() > 0) {
                         customACQuickAdapter.setNewData(mListHistoryWord);
                         customACQuickAdapter.isNeedToChange = true;
@@ -194,7 +197,7 @@ public class QuickTranslate extends StandOutWindow implements View.OnTouchListen
             @Override
             public void onClick(View view) {
                 if (mAutoCompleteTextView.getText().toString().matches("")) {
-                    mListHistoryWord = mSaveDB.getHistoryWord(50);
+                    mListHistoryWord = mSaveDB.getHistoryWord(10);
                     if (mListHistoryWord.size() > 0) {
                         customACQuickAdapter.setNewData(mListHistoryWord);
                         customACQuickAdapter.isNeedToChange = true;
@@ -207,6 +210,24 @@ public class QuickTranslate extends StandOutWindow implements View.OnTouchListen
                 }
             }
         });
+    }
+
+    @Override
+    public void openWord(String wordName) {
+        mAutoCompleteTextView.setText(wordName);
+        Word word = databaseAccess.getWord(wordName);
+        mCustomPagerAdapter.setEnViDetails(HtmlUtils.format(word).toString());
+        mCustomPagerAdapter.notifyDataSetChanged();
+        new Handler().post(new Runnable() {
+            public void run() {
+                mAutoCompleteTextView.dismissDropDown();
+            }});
+    }
+
+    @Override
+    public void generateWord(String wordName) {
+        mAutoCompleteTextView.setText(wordName);
+        runSearch(wordName);
     }
 
     private void startMainActivity() {
@@ -222,7 +243,7 @@ public class QuickTranslate extends StandOutWindow implements View.OnTouchListen
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        mCustomPagerAdapter = new CustomPagerAdapter(getApplicationContext());
+        mCustomPagerAdapter = new CustomPagerAdapter(getApplicationContext(), this);
         viewPager.setAdapter(mCustomPagerAdapter);
     }
 
