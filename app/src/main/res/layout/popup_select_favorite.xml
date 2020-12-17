@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="260dp"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
@@ -16,14 +17,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:paddingTop="@dimen/five_dp"
-            android:paddingRight="@dimen/ten_dp"
+            android:paddingEnd="@dimen/ten_dp"
             android:paddingBottom="@dimen/five_dp"
-            android:layout_marginLeft="@dimen/five_dp"
+            android:layout_marginStart="@dimen/five_dp"
             android:text="Select category color"
             android:textColor="@color/white"
             android:textAlignment="center"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,RtlSymmetry" />
     </RelativeLayout>
 
     <LinearLayout
@@ -44,15 +46,14 @@
             android:id="@+id/btStarBlue"
             android:layout_width="@dimen/thirty_dp"
             android:layout_height="@dimen/thirty_dp"
-            android:layout_marginLeft="@dimen/thirty_dp"
+            android:layout_marginStart="@dimen/thirty_dp"
             android:background="@drawable/circle_select_favorite_blue" />
 
         <ImageButton
             android:id="@+id/btStarPink"
             android:layout_width="@dimen/thirty_dp"
             android:layout_height="@dimen/thirty_dp"
-            android:layout_marginLeft="@dimen/thirty_dp"
+            android:layout_marginStart="@dimen/thirty_dp"
             android:background="@drawable/circle_select_favorite_pink" />
-
     </LinearLayout>
 </LinearLayout>

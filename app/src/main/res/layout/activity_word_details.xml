@@ -63,9 +63,10 @@
                 android:layout_marginEnd="20dp"
                 android:layout_toStartOf="@+id/btSearch"
                 android:visibility="gone"
-                app:ico_background_color="@android:color/transparent"
                 app:ico_color="@color/white"
                 app:ico_icon="@string/faw_star_o"
+                app:ico_contour_width="0dp"
+                app:ico_contour_color="@color/md_blue_grey_50"
                 app:ico_size="25dp"/>
 
             <android.support.v7.widget.AppCompatImageView
@@ -76,9 +77,10 @@
                 android:layout_marginEnd="20dp"
                 android:layout_toStartOf="@+id/btSearch"
                 android:visibility="gone"
-                app:ico_background_color="@android:color/transparent"
                 app:ico_color="@color/md_amber_600"
                 app:ico_icon="@string/faw_star"
+                app:ico_contour_width="2dp"
+                app:ico_contour_color="@color/md_blue_grey_50"
                 app:ico_size="25dp"/>
 
             <android.support.v7.widget.AppCompatImageView
@@ -92,6 +94,8 @@
                 app:ico_background_color="@android:color/transparent"
                 app:ico_color="@color/md_blue_500"
                 app:ico_icon="@string/faw_star"
+                app:ico_contour_width="2dp"
+                app:ico_contour_color="@color/md_blue_grey_50"
                 app:ico_size="25dp"/>
 
             <android.support.v7.widget.AppCompatImageView
@@ -105,6 +109,8 @@
                 app:ico_background_color="@android:color/transparent"
                 app:ico_color="@color/md_deep_orange_A400"
                 app:ico_icon="@string/faw_star"
+                app:ico_contour_width="2dp"
+                app:ico_contour_color="@color/md_blue_grey_50"
                 app:ico_size="25dp"/>
 
             <ImageButton
