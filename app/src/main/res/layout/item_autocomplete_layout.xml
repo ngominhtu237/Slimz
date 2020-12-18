@@ -6,7 +6,7 @@
     android:background="@drawable/border_item"
     android:layout_height="45dp">
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iconSearchSuggest"
         android:layout_width="17dp"
         android:layout_height="17dp"
@@ -16,7 +16,7 @@
         app:ico_color="@color/colorPrimary"
         app:ico_icon="@string/gmd_search" />
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iconHistorySuggest"
         android:layout_width="17dp"
         android:layout_height="17dp"
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true">
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iconArrow"
             android:layout_width="14dp"
             android:layout_height="14dp"

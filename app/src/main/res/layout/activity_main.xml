@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -45,7 +45,7 @@
                 android:layout_marginTop="5dp"
                 android:background="@color/white">
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iconSearch"
                     android:layout_width="17dp"
                     android:layout_height="17dp"
@@ -56,7 +56,7 @@
                     app:ico_color="@color/colorPrimary"
                     app:ico_icon="@string/gmd_search"/>
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivHistorySuggest"
                     android:layout_width="23dp"
                     android:layout_height="23dp"
@@ -87,7 +87,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true">
-                    <android.support.v7.widget.AppCompatImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ivIconMicro"
                         android:layout_width="18dp"
                         android:layout_height="18dp"
@@ -104,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true">
-                    <android.support.v7.widget.AppCompatImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ivIconDeleteLetter"
                         android:layout_width="17dp"
                         android:layout_height="17dp"
@@ -120,7 +120,7 @@
             </RelativeLayout>
         </RelativeLayout>
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -128,7 +128,7 @@
         android:background="@color/md_grey_300"
         android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

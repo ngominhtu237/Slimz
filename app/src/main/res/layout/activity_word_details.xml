@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".WordDetailsActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp" >
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -55,7 +55,7 @@
                 android:includeFontPadding="false"
                 tools:ignore="HardcodedText" />
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/btStar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
                 app:ico_contour_color="@color/md_blue_grey_50"
                 app:ico_size="25dp"/>
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/btStarYellow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                 app:ico_contour_color="@color/md_blue_grey_50"
                 app:ico_size="25dp"/>
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/btStarBlue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
                 app:ico_contour_color="@color/md_blue_grey_50"
                 app:ico_size="25dp"/>
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/btStarPink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
 
         </RelativeLayout>
 
-        <android.support.design.widget.TabLayout
+        <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -135,9 +135,9 @@
             app:tabIndicatorHeight="3dp"
             app:tabMode="scrollable"/>
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -2,7 +2,7 @@ package com.samsung.lookup.fragment.base;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 /**
  * Created by tu.nm1 on 14,December,2020
