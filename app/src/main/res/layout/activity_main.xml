@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="com.tunm.slimz.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -68,7 +68,7 @@
                     app:ico_icon="@string/gmd_history"
                     android:visibility="gone"/>
 
-                <com.samsung.lookup.view.CustomAutoCompleteTextView
+                <com.tunm.slimz.view.CustomAutoCompleteTextView
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"

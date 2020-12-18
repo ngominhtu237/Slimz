@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.samsung.lookup">
+    package="com.tunm.slimz">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
-        android:name=".MyApp"
+        android:name="com.tunm.slimz.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/dictionary"
         android:label="@string/app_name"
@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".MainActivity"
+            android:name="com.tunm.slimz.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,26 +25,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.WordDetailsActivity"
+            android:name="com.tunm.slimz.activity.WordDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".activity.HistoryWordActivity"
+            android:name="com.tunm.slimz.activity.HistoryWordActivity"
             android:label="@string/history_word"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".activity.MarkWordActivity"
+            android:name="com.tunm.slimz.activity.MarkWordActivity"
             android:label="@string/favorite_word"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-        <service android:name=".service.QuickTranslate" />
+        <service android:name="com.tunm.slimz.service.QuickTranslate" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713"/>
     </application>
-
 </manifest>
