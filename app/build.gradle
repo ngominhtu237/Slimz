@@ -38,4 +38,6 @@ dependencies {
     implementation project(':sqliteassethelper-2.0.1')
     compile project(path: ':standOut')
     implementation files('libs/jsoup-1.12.1.jar')
+
+    implementation 'com.google.android.gms:play-services-ads:19.6.0'
 }

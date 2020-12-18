@@ -21,9 +21,13 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.mikepenz.iconics.context.IconicsContextWrapper;
 import com.samsung.lookup.activity.HistoryWordActivity;
 import com.samsung.lookup.activity.MarkWordActivity;
+import com.samsung.lookup.activity.WordDetailsActivity;
+import com.samsung.lookup.activity.base.BaseActivity;
 import com.samsung.lookup.adapter.CustomACWordAdapter;
 import com.samsung.lookup.adapter.CustomRecycleViewAdapter;
 import com.samsung.lookup.event.RecyclerClick_Listener;
@@ -39,9 +43,8 @@ import wei.mark.standout.StandOutWindow;
 import static com.samsung.lookup.MyApp.getDictionaryDB;
 import static com.samsung.lookup.MyApp.getEngVietDbAccess;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
-    private static final String TAG = "MyActivity";
     private final int REQ_CODE_SPEECH_INPUT = 100;
     public final static int REQUEST_CODE = 113;
     private CustomAutoCompleteTextView completeTextView;
@@ -56,30 +59,18 @@ public class MainActivity extends AppCompatActivity {
     private GetDataTask getDataTask;
 
     @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(IconicsContextWrapper.wrap(newBase));
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         if(isMyServiceRunning(QuickTranslate.class)) {
             Intent intent = new Intent(MainActivity.this, QuickTranslate.class);
             stopService(intent);
         }
-//        StandOutWindow
-//                .closeAll(MainActivity.this, QuickTranslate.class);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
         mRecyclerView = findViewById(R.id.recycleView);
         ivIconMicro = findViewById(R.id.ivIconMicro);
         ivIconDelLetter = findViewById(R.id.ivIconDeleteLetter);
         mTitle = getResources().getStringArray(R.array.title_list);
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(""); // hide title
 
         completeTextView = findViewById(R.id.textView);
         customAutoCompWordAdapter = new CustomACWordAdapter(MainActivity.this, R.layout.item_autocomplete_layout, wordNameArr);
@@ -151,6 +142,29 @@ public class MainActivity extends AppCompatActivity {
         implementRecyclerViewClickListeners();
 
         checkDrawOverlayPermission();
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void initToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("");
+        } else {
+            Log.v(TAG, "getSupportActionBar null");
+        }
+    }
+
+    @Override
+    protected void loadAd() {
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     private void implementMicroAndDeleteListeners() {

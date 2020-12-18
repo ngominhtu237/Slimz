@@ -13,7 +13,7 @@ import android.webkit.WebView;
 
 import com.samsung.lookup.IClickWordCallback;
 import com.samsung.lookup.R;
-import com.samsung.lookup.WordDetailsActivity;
+import com.samsung.lookup.activity.WordDetailsActivity;
 import com.samsung.lookup.fragment.base.BaseFragment;
 import com.samsung.lookup.model.Word;
 import com.samsung.lookup.utils.HtmlUtils;

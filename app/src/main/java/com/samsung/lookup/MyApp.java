@@ -2,6 +2,9 @@ package com.samsung.lookup;
 
 import android.app.Application;
 
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.samsung.lookup.data.engviet.EngVietDbAccess;
 import com.samsung.lookup.data.mydb.DictionaryDB;
 
@@ -20,6 +23,12 @@ public class MyApp extends Application {
 
         engVietDbAccess = new EngVietDbAccess(this);
         engVietDbAccess.open();
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
 
     }
 

@@ -4,21 +4,23 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.samsung.lookup.R;
-import com.samsung.lookup.WordDetailsActivity;
+import com.samsung.lookup.activity.base.BaseActivity;
 import com.samsung.lookup.adapter.FavoriteRecycleViewAdapter;
 import com.samsung.lookup.event.RecyclerClick_Listener;
 import com.samsung.lookup.event.RecyclerTouchListener;
@@ -30,7 +32,7 @@ import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
 import static com.samsung.lookup.MyApp.getDictionaryDB;
 
-public class MarkWordActivity extends AppCompatActivity {
+public class MarkWordActivity extends BaseActivity {
 
     private RecyclerView mRecyclerView;
     private FavoriteRecycleViewAdapter mFavoriteRecycleViewAdapter;
@@ -43,9 +45,7 @@ public class MarkWordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mark_word);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         etWordMarkSearch = findViewById(R.id.etWordMarkSearch);
         mRecyclerView = findViewById(R.id.rvWordMark);
 
@@ -62,6 +62,27 @@ public class MarkWordActivity extends AppCompatActivity {
         mFavoriteRecycleViewAdapter = new FavoriteRecycleViewAdapter(this, mArrWorkMark);
         mRecyclerView.setAdapter(mFavoriteRecycleViewAdapter);
 
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_mark_word;
+    }
+
+    @Override
+    protected void initToolbar() {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        } else {
+            Log.v(TAG, "getSupportActionBar null");
+        }
+    }
+
+    @Override
+    protected void loadAd() {
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override

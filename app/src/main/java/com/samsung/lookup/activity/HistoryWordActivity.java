@@ -4,16 +4,20 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.samsung.lookup.R;
-import com.samsung.lookup.WordDetailsActivity;
+import com.samsung.lookup.activity.base.BaseActivity;
 import com.samsung.lookup.adapter.HistoryRecycleViewAdapter;
 import com.samsung.lookup.event.RecyclerClick_Listener;
 import com.samsung.lookup.event.RecyclerTouchListener;
@@ -24,7 +28,7 @@ import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
 import static com.samsung.lookup.MyApp.getDictionaryDB;
 
-public class HistoryWordActivity extends AppCompatActivity {
+public class HistoryWordActivity extends BaseActivity {
 
     private RecyclerView mRecyclerView;
     private HistoryRecycleViewAdapter mHistoryRecycleViewAdapter;
@@ -32,12 +36,10 @@ public class HistoryWordActivity extends AppCompatActivity {
     private ArrayList<String> mListHistoryWord;
     private EditText etWordSearch;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history_word);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         etWordSearch = findViewById(R.id.etWordSearch);
         mRecyclerView = findViewById(R.id.rvWordHistory);
         implementEditTextWordSearchListener();
@@ -59,6 +61,27 @@ public class HistoryWordActivity extends AppCompatActivity {
         mListHistoryWord = getDictionaryDB().getHistoryWord(200);
         mHistoryRecycleViewAdapter.swap(mListHistoryWord);
         super.onResume();
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_history_word;
+    }
+
+    @Override
+    protected void initToolbar() {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        } else {
+            Log.v(TAG, "getSupportActionBar null");
+        }
+    }
+
+    @Override
+    protected void loadAd() {
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     public void removeItem(int position) {

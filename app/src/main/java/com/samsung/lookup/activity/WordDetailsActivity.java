@@ -1,12 +1,13 @@
-package com.samsung.lookup;
+package com.samsung.lookup.activity;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.material.tabs.TabLayout;
 import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -17,7 +18,8 @@ import android.widget.TextView;
 
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.Iconics;
-import com.mikepenz.iconics.context.IconicsContextWrapper;
+import com.samsung.lookup.R;
+import com.samsung.lookup.activity.base.BaseActivity;
 import com.samsung.lookup.adapter.ViewPagerAdapter;
 import com.samsung.lookup.fragment.EngEngFragment;
 import com.samsung.lookup.fragment.EngVietFragment;
@@ -29,7 +31,7 @@ import com.samsung.lookup.fragment.stack.WordStack;
 import static com.samsung.lookup.MyApp.getDictionaryDB;
 import static com.samsung.lookup.fragment.stack.WordStack.addToStack;
 
-public class WordDetailsActivity extends AppCompatActivity implements View.OnClickListener {
+public class WordDetailsActivity extends BaseActivity implements View.OnClickListener {
 
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
@@ -42,17 +44,11 @@ public class WordDetailsActivity extends AppCompatActivity implements View.OnCli
     private static final String[] arrSelectStarColor= {"yellow", "blue", "pink"};
 
     @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(IconicsContextWrapper.wrap(newBase));
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_word_details);
         Iconics.init(getApplicationContext());
         Iconics.registerFont(new GoogleMaterial());
-        Toolbar toolbar = findViewById(R.id.toolbar);
+
         tvWordName = findViewById(R.id.tvWordName);
         btBack = findViewById(R.id.btBack);
         btStar = findViewById(R.id.btStar);
@@ -64,9 +60,6 @@ public class WordDetailsActivity extends AppCompatActivity implements View.OnCli
         btStarYellow.setOnClickListener(this);
         btStarBlue.setOnClickListener(this);
         btStarPink.setOnClickListener(this);
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(""); // hide title
 
         Intent intent = getIntent();
         // From MainActivity
@@ -97,6 +90,29 @@ public class WordDetailsActivity extends AppCompatActivity implements View.OnCli
         setupViewPager(mViewPager);
         mTabLayout = findViewById(R.id.tabs);
         mTabLayout.setupWithViewPager(mViewPager);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_word_details;
+    }
+
+    @Override
+    protected void initToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("");
+        } else {
+            Log.v(TAG, "getSupportActionBar null");
+        }
+    }
+
+    @Override
+    protected void loadAd() {
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     private void checkWordFavorite(String receivedWordName) {

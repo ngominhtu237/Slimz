@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".WordDetailsActivity"
+            android:name=".activity.WordDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
@@ -40,6 +40,10 @@
             android:theme="@style/AppTheme" />
 
         <service android:name=".service.QuickTranslate" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
     </application>
 
 </manifest>
