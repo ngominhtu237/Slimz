@@ -1,0 +1,2 @@
+# Slimz
+Slimz Dictionary
