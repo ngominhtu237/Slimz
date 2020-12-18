@@ -14,7 +14,6 @@ import android.webkit.WebView;
 import com.samsung.lookup.IClickWordCallback;
 import com.samsung.lookup.R;
 import com.samsung.lookup.WordDetailsActivity;
-import com.samsung.lookup.data.DatabaseAccess;
 import com.samsung.lookup.fragment.base.BaseFragment;
 import com.samsung.lookup.model.Word;
 import com.samsung.lookup.utils.HtmlUtils;
@@ -22,16 +21,16 @@ import com.samsung.lookup.utils.WebViewUtils;
 
 import org.jsoup.nodes.Document;
 
+import static com.samsung.lookup.MyApp.getEngVietDbAccess;
+
 /**
  * A quick_translate {@link Fragment} subclass.
  */
 public class EngVietFragment extends BaseFragment {
 
-    private DatabaseAccess databaseAccess;
 
     public EngVietFragment() {
-        databaseAccess = DatabaseAccess.getInstance(mActivity);
-        databaseAccess.open();
+
     }
 
     @Override
@@ -51,7 +50,7 @@ public class EngVietFragment extends BaseFragment {
         if(receivedWordName == null) {
             receivedWordName = intent.getStringExtra("resendWord");
         }
-        Word word = databaseAccess.getWord(receivedWordName);
+        Word word = getEngVietDbAccess().getWord(receivedWordName);
         Document document = HtmlUtils.format(word);
         WebViewUtils.addScript(mActivity, mWebViewDetails, callback);
 

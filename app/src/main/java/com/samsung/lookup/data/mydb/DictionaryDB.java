@@ -1,4 +1,4 @@
-package com.samsung.lookup.data.secondDB;
+package com.samsung.lookup.data.mydb;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -13,15 +13,25 @@ import com.samsung.lookup.model.WorkMark;
 
 import java.util.ArrayList;
 
-public class SaveDB extends SQLiteOpenHelper {
+public class DictionaryDB extends SQLiteOpenHelper {
+
+    private static DictionaryDB mInstance = null;
 
     private static final String TAG = "SaveDB";
     private static final String DATABASE_NAME = "word.db";
     private static final int DATABASE_VERSION = 5;
     private SQLiteDatabase mSQLiteDatabase;
 
-    public SaveDB(Context context) {
+    public DictionaryDB(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    // Approach #2
+    public static DictionaryDB getInstance(Context context) {
+        if (mInstance == null) {
+            mInstance = new DictionaryDB(context.getApplicationContext());
+        }
+        return mInstance;
     }
 
     @Override

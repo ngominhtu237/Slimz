@@ -15,14 +15,14 @@ import android.widget.EditText;
 import com.samsung.lookup.R;
 import com.samsung.lookup.WordDetailsActivity;
 import com.samsung.lookup.adapter.HistoryRecycleViewAdapter;
-import com.samsung.lookup.data.DatabaseAccess;
-import com.samsung.lookup.data.secondDB.SaveDB;
 import com.samsung.lookup.event.RecyclerClick_Listener;
 import com.samsung.lookup.event.RecyclerTouchListener;
 
 import java.util.ArrayList;
 
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
+
+import static com.samsung.lookup.MyApp.getDictionaryDB;
 
 public class HistoryWordActivity extends AppCompatActivity {
 
@@ -32,8 +32,6 @@ public class HistoryWordActivity extends AppCompatActivity {
     private ArrayList<String> mListHistoryWord;
     private EditText etWordSearch;
 
-    private DatabaseAccess databaseAccess;
-    private SaveDB mSaveDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +43,7 @@ public class HistoryWordActivity extends AppCompatActivity {
         implementEditTextWordSearchListener();
         implementRecyclerViewClickListeners();
 
-        databaseAccess = DatabaseAccess.getInstance(this);
-        databaseAccess.open();
-        mSaveDB = new SaveDB(this);
-        mSaveDB.open();
-        mListHistoryWord = mSaveDB.getHistoryWord(200);
+        mListHistoryWord = getDictionaryDB().getHistoryWord(200);
 
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new LandingAnimator());
@@ -62,16 +56,16 @@ public class HistoryWordActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        mListHistoryWord = mSaveDB.getHistoryWord(200);
+        mListHistoryWord = getDictionaryDB().getHistoryWord(200);
         mHistoryRecycleViewAdapter.swap(mListHistoryWord);
         super.onResume();
     }
 
     public void removeItem(int position) {
-        mSaveDB.deleteHistoryWord(HistoryWordActivity.this, mListHistoryWord.get(position)); //1
+        getDictionaryDB().deleteHistoryWord(HistoryWordActivity.this, mListHistoryWord.get(position)); //1
         // sau khi delete thì phải cập nhật lại mListHistoryWord trong class này vì nếu không update thì lần 2 thực hiện dòng 1
         // vẫn là mListHistoryWord ban đầu
-        mListHistoryWord = mSaveDB.getHistoryWord(200);
+        mListHistoryWord = getDictionaryDB().getHistoryWord(200);
         mHistoryRecycleViewAdapter.removeItemAnimation(position);
     }
 

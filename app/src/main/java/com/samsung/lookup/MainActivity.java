@@ -18,7 +18,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -27,20 +26,18 @@ import com.samsung.lookup.activity.HistoryWordActivity;
 import com.samsung.lookup.activity.MarkWordActivity;
 import com.samsung.lookup.adapter.CustomACWordAdapter;
 import com.samsung.lookup.adapter.CustomRecycleViewAdapter;
-import com.samsung.lookup.data.DatabaseAccess;
-import com.samsung.lookup.data.secondDB.SaveDB;
 import com.samsung.lookup.event.RecyclerClick_Listener;
 import com.samsung.lookup.event.RecyclerTouchListener;
-import com.samsung.lookup.fragment.stack.WordStack;
 import com.samsung.lookup.service.QuickTranslate;
-import com.samsung.lookup.service.QuickTranslateService;
 import com.samsung.lookup.view.CustomAutoCompleteTextView;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
 import wei.mark.standout.StandOutWindow;
-import wei.mark.standout.ui.Window;
+
+import static com.samsung.lookup.MyApp.getDictionaryDB;
+import static com.samsung.lookup.MyApp.getEngVietDbAccess;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> wordNameArr = new ArrayList<>();
     private CustomACWordAdapter customAutoCompWordAdapter;
     private CustomRecycleViewAdapter recycleViewAdapter;
-    private DatabaseAccess databaseAccess;
-    private SaveDB mSaveDB;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private String[] mTitle;
@@ -87,10 +82,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(""); // hide title
 
         completeTextView = findViewById(R.id.textView);
-        databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
-        databaseAccess.open();
-        mSaveDB = new SaveDB(this);
-        mSaveDB.open();
         customAutoCompWordAdapter = new CustomACWordAdapter(MainActivity.this, R.layout.item_autocomplete_layout, wordNameArr);
         completeTextView.setThreshold(0);
         completeTextView.setAdapter(customAutoCompWordAdapter);
@@ -123,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.v("onTextChanged", "length < 0 - getHistory");
                     ivIconMicro.setVisibility(View.VISIBLE);
                     ivIconDelLetter.setVisibility(View.GONE);
-                    mListHistoryWord = mSaveDB.getHistoryWord(50);
+                    mListHistoryWord = getDictionaryDB().getHistoryWord(50);
                     if(mListHistoryWord.size() > 0) {
                         customAutoCompWordAdapter.setNewData(mListHistoryWord);
                         customAutoCompWordAdapter.isNeedToChange = true;
@@ -139,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(completeTextView.getText().toString().matches("")) {
-                    mListHistoryWord = mSaveDB.getHistoryWord(50);
+                    mListHistoryWord = getDictionaryDB().getHistoryWord(50);
                     if(mListHistoryWord.size() > 0) {
                         customAutoCompWordAdapter.setNewData(mListHistoryWord);
                         customAutoCompWordAdapter.isNeedToChange = true;
@@ -238,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Integer doInBackground(String... strings) {
             Log.v("onTextChanged", "word search: " + strings[0]);
-            wordNameArr = databaseAccess.getWordNames(strings[0], 25);
+            wordNameArr = getEngVietDbAccess().getWordNames(strings[0], 25);
             return null;
         }
 

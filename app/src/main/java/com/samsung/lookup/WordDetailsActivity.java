@@ -19,7 +19,6 @@ import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.Iconics;
 import com.mikepenz.iconics.context.IconicsContextWrapper;
 import com.samsung.lookup.adapter.ViewPagerAdapter;
-import com.samsung.lookup.data.secondDB.SaveDB;
 import com.samsung.lookup.fragment.EngEngFragment;
 import com.samsung.lookup.fragment.EngVietFragment;
 import com.samsung.lookup.fragment.NoteFragment;
@@ -27,8 +26,7 @@ import com.samsung.lookup.fragment.SynonymFragment;
 import com.samsung.lookup.fragment.TechnicalFragment;
 import com.samsung.lookup.fragment.stack.WordStack;
 
-import java.util.Arrays;
-
+import static com.samsung.lookup.MyApp.getDictionaryDB;
 import static com.samsung.lookup.fragment.stack.WordStack.addToStack;
 
 public class WordDetailsActivity extends AppCompatActivity implements View.OnClickListener {
@@ -41,7 +39,6 @@ public class WordDetailsActivity extends AppCompatActivity implements View.OnCli
     private TextView tvWordName;
     private String receivedWordName;
 
-    private SaveDB mSaveDB;
     private static final String[] arrSelectStarColor= {"yellow", "blue", "pink"};
 
     @Override
@@ -71,9 +68,6 @@ public class WordDetailsActivity extends AppCompatActivity implements View.OnCli
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(""); // hide title
 
-        mSaveDB = new SaveDB(this);
-        mSaveDB.open();
-
         Intent intent = getIntent();
         // From MainActivity
         receivedWordName = intent.getStringExtra("wordFromActivity");
@@ -90,7 +84,7 @@ public class WordDetailsActivity extends AppCompatActivity implements View.OnCli
             i.putExtra("resendWord", receivedWordName);
         }
         if(receivedWordName != null) {
-            mSaveDB.addHistoryWord(this, receivedWordName);
+            getDictionaryDB().addHistoryWord(this, receivedWordName);
             addToStack(receivedWordName);
         }
         Log.v("wordstack", String.valueOf(WordStack.stackOfWords));
@@ -106,7 +100,7 @@ public class WordDetailsActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void checkWordFavorite(String receivedWordName) {
-        String isFavoriteWordColor = mSaveDB.getColorFavoriteWordByName(this, receivedWordName);
+        String isFavoriteWordColor = getDictionaryDB().getColorFavoriteWordByName(this, receivedWordName);
         switch (isFavoriteWordColor) {
             case "noColor":
                 btStar.setVisibility(View.VISIBLE);
@@ -171,7 +165,7 @@ public class WordDetailsActivity extends AppCompatActivity implements View.OnCli
             case R.id.btStarYellow:
                 btStar.setVisibility(View.VISIBLE);
                 btStarYellow.setVisibility(View.GONE);
-                mSaveDB.removeFavoriteWord(this, receivedWordName);
+                getDictionaryDB().removeFavoriteWord(this, receivedWordName);
                 break;
             case R.id.btStarBlue:
                 btStar.setVisibility(View.VISIBLE);
@@ -199,7 +193,7 @@ public class WordDetailsActivity extends AppCompatActivity implements View.OnCli
                 btStarBlue.setVisibility(View.GONE);
                 btStarPink.setVisibility(View.GONE);
                 btStarYellow.setVisibility(View.VISIBLE);
-                mSaveDB.addFavoriteWord(WordDetailsActivity.this, receivedWordName, arrSelectStarColor[0]);
+                getDictionaryDB().addFavoriteWord(WordDetailsActivity.this, receivedWordName, arrSelectStarColor[0]);
                 dialog.dismiss();
             }
         });
@@ -210,7 +204,7 @@ public class WordDetailsActivity extends AppCompatActivity implements View.OnCli
                 btStarYellow.setVisibility(View.GONE);
                 btStarPink.setVisibility(View.GONE);
                 btStarBlue.setVisibility(View.VISIBLE);
-                mSaveDB.addFavoriteWord(WordDetailsActivity.this, receivedWordName, arrSelectStarColor[1]);
+                getDictionaryDB().addFavoriteWord(WordDetailsActivity.this, receivedWordName, arrSelectStarColor[1]);
                 dialog.dismiss();
             }
         });
@@ -221,7 +215,7 @@ public class WordDetailsActivity extends AppCompatActivity implements View.OnCli
                 btStarYellow.setVisibility(View.GONE);
                 btStarBlue.setVisibility(View.GONE);
                 btStarPink.setVisibility(View.VISIBLE);
-                mSaveDB.addFavoriteWord(WordDetailsActivity.this, receivedWordName, arrSelectStarColor[2]);
+                getDictionaryDB().addFavoriteWord(WordDetailsActivity.this, receivedWordName, arrSelectStarColor[2]);
                 dialog.dismiss();
             }
         });

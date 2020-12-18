@@ -20,8 +20,6 @@ import com.mikepenz.iconics.IconicsDrawable;
 import com.samsung.lookup.R;
 import com.samsung.lookup.WordDetailsActivity;
 import com.samsung.lookup.adapter.FavoriteRecycleViewAdapter;
-import com.samsung.lookup.data.DatabaseAccess;
-import com.samsung.lookup.data.secondDB.SaveDB;
 import com.samsung.lookup.event.RecyclerClick_Listener;
 import com.samsung.lookup.event.RecyclerTouchListener;
 import com.samsung.lookup.model.WorkMark;
@@ -29,6 +27,8 @@ import com.samsung.lookup.model.WorkMark;
 import java.util.ArrayList;
 
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
+
+import static com.samsung.lookup.MyApp.getDictionaryDB;
 
 public class MarkWordActivity extends AppCompatActivity {
 
@@ -38,8 +38,6 @@ public class MarkWordActivity extends AppCompatActivity {
     private ArrayList<WorkMark> mArrWorkMark;
     private EditText etWordMarkSearch;
 
-    private DatabaseAccess databaseAccess;
-    private SaveDB mSaveDB;
     private Menu mOptionMenu;
 
     @Override
@@ -54,15 +52,11 @@ public class MarkWordActivity extends AppCompatActivity {
         implementEditTextWordSearchListener();
         implementRecyclerViewClickListeners();
 
-        databaseAccess = DatabaseAccess.getInstance(this);
-        databaseAccess.open();
-        mSaveDB = new SaveDB(this);
-        mSaveDB.open();
-        mArrWorkMark = mSaveDB.getFavoriteWord(200);
+        mArrWorkMark = getDictionaryDB().getFavoriteWord(200);
 
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new LandingAnimator());
-        mLinearLayoutManager = new  LinearLayoutManager(this);
+        mLinearLayoutManager = new LinearLayoutManager(this);
         mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mFavoriteRecycleViewAdapter = new FavoriteRecycleViewAdapter(this, mArrWorkMark);
@@ -72,7 +66,7 @@ public class MarkWordActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        mArrWorkMark = mSaveDB.getFavoriteWord(200);
+        mArrWorkMark = getDictionaryDB().getFavoriteWord(200);
         mFavoriteRecycleViewAdapter.swap(mArrWorkMark);
         super.onResume();
     }
@@ -150,7 +144,7 @@ public class MarkWordActivity extends AppCompatActivity {
                 openDialogColor();
                 break;
             case R.id.action_clear_filter_word_mark:
-                mArrWorkMark = mSaveDB.getFavoriteWord(200);
+                mArrWorkMark = getDictionaryDB().getFavoriteWord(200);
                 mFavoriteRecycleViewAdapter.swap(mArrWorkMark);
                 mOptionMenu.findItem(R.id.action_filter_word_mark).setVisible(true);
                 mOptionMenu.findItem(R.id.action_clear_filter_word_mark).setVisible(false);
@@ -169,7 +163,7 @@ public class MarkWordActivity extends AppCompatActivity {
         btStarYellowDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mArrWorkMark = mSaveDB.getFavoriteWordByColor(MarkWordActivity.this, "yellow");
+                mArrWorkMark = getDictionaryDB().getFavoriteWordByColor(MarkWordActivity.this, "yellow");
                 mFavoriteRecycleViewAdapter.swap(mArrWorkMark);
                 mOptionMenu.findItem(R.id.action_filter_word_mark).setVisible(false);
                 mOptionMenu.findItem(R.id.action_clear_filter_word_mark).setVisible(true);
@@ -179,7 +173,7 @@ public class MarkWordActivity extends AppCompatActivity {
         btStarBlueDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mArrWorkMark = mSaveDB.getFavoriteWordByColor(MarkWordActivity.this, "blue");
+                mArrWorkMark = getDictionaryDB().getFavoriteWordByColor(MarkWordActivity.this, "blue");
                 mFavoriteRecycleViewAdapter.swap(mArrWorkMark);
                 mOptionMenu.findItem(R.id.action_filter_word_mark).setVisible(false);
                 mOptionMenu.findItem(R.id.action_clear_filter_word_mark).setVisible(true);
@@ -189,7 +183,7 @@ public class MarkWordActivity extends AppCompatActivity {
         btStarPinkDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mArrWorkMark = mSaveDB.getFavoriteWordByColor(MarkWordActivity.this, "pink");
+                mArrWorkMark = getDictionaryDB().getFavoriteWordByColor(MarkWordActivity.this, "pink");
                 mFavoriteRecycleViewAdapter.swap(mArrWorkMark);
                 mOptionMenu.findItem(R.id.action_filter_word_mark).setVisible(false);
                 mOptionMenu.findItem(R.id.action_clear_filter_word_mark).setVisible(true);

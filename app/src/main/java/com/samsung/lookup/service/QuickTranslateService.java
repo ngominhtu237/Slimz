@@ -27,12 +27,13 @@ import com.samsung.lookup.MainActivity;
 import com.samsung.lookup.R;
 import com.samsung.lookup.adapter.CustomACQuickAdapter;
 import com.samsung.lookup.adapter.CustomPagerAdapter;
-import com.samsung.lookup.data.DatabaseAccess;
-import com.samsung.lookup.data.secondDB.SaveDB;
 import com.samsung.lookup.utils.Measure;
 import com.samsung.lookup.view.CustomAutoCompleteTextView;
 
 import java.util.ArrayList;
+
+import static com.samsung.lookup.MyApp.getDictionaryDB;
+import static com.samsung.lookup.MyApp.getEngVietDbAccess;
 
 public class QuickTranslateService extends Service implements View.OnTouchListener, View.OnClickListener, CustomACQuickAdapter.WordDetailsInterface {
     public static final int WIDTH_FLOAT_WINDOW = 300; // dp?
@@ -53,8 +54,6 @@ public class QuickTranslateService extends Service implements View.OnTouchListen
     private ViewPager mViewPager;
     private CustomPagerAdapter mCustomPagerAdapter;
 
-    private DatabaseAccess databaseAccess;
-    private SaveDB mSaveDB;
     private ArrayList<String> wordNameArr = new ArrayList<>();
     private CustomACQuickAdapter customACQuickAdapter;
     private GetDataTask getDataTask;
@@ -84,11 +83,6 @@ public class QuickTranslateService extends Service implements View.OnTouchListen
         mWindowManager.getDefaultDisplay().getMetrics(displayMetrics);
         heightScreen = displayMetrics.heightPixels;
         widthScreen = displayMetrics.widthPixels;
-
-        databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
-        databaseAccess.open();
-        mSaveDB = new SaveDB(this);
-        mSaveDB.open();
 
         createFloatingWindow();
         createFloatingIcon();
@@ -141,7 +135,7 @@ public class QuickTranslateService extends Service implements View.OnTouchListen
                 if (mAutoCompleteTextView.getText().length() > 0) {
                     customACQuickAdapter.isNeedToChange = false;
                 } else {
-                    mListHistoryWord = mSaveDB.getHistoryWord(50);
+                    mListHistoryWord = getDictionaryDB().getHistoryWord(50);
                     if (mListHistoryWord.size() > 0) {
                         customACQuickAdapter.setNewData(mListHistoryWord);
                         customACQuickAdapter.isNeedToChange = true;
@@ -158,7 +152,7 @@ public class QuickTranslateService extends Service implements View.OnTouchListen
             @Override
             public void onClick(View view) {
                 if (mAutoCompleteTextView.getText().toString().matches("")) {
-                    mListHistoryWord = mSaveDB.getHistoryWord(50);
+                    mListHistoryWord = getDictionaryDB().getHistoryWord(50);
                     if (mListHistoryWord.size() > 0) {
                         customACQuickAdapter.setNewData(mListHistoryWord);
                         customACQuickAdapter.isNeedToChange = true;
@@ -394,7 +388,7 @@ public class QuickTranslateService extends Service implements View.OnTouchListen
 
         @Override
         protected Integer doInBackground(String... strings) {
-            wordNameArr = databaseAccess.getWordNames(strings[0], 10);
+            wordNameArr = getEngVietDbAccess().getWordNames(strings[0], 10);
             return null;
         }
 

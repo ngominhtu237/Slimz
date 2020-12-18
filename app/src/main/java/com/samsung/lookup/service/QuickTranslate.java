@@ -29,9 +29,6 @@ import com.samsung.lookup.MainActivity;
 import com.samsung.lookup.R;
 import com.samsung.lookup.adapter.CustomACQuickAdapter;
 import com.samsung.lookup.adapter.CustomPagerAdapter;
-import com.samsung.lookup.data.DatabaseAccess;
-import com.samsung.lookup.data.secondDB.SaveDB;
-import com.samsung.lookup.fragment.stack.WordStack;
 import com.samsung.lookup.model.Word;
 import com.samsung.lookup.utils.HtmlUtils;
 import com.samsung.lookup.view.CustomAutoCompleteTextView;
@@ -43,6 +40,8 @@ import wei.mark.standout.StandOutWindow;
 import wei.mark.standout.constants.StandOutFlags;
 import wei.mark.standout.ui.Window;
 
+import static com.samsung.lookup.MyApp.getDictionaryDB;
+import static com.samsung.lookup.MyApp.getEngVietDbAccess;
 import static com.samsung.lookup.fragment.stack.WordStack.addToStack;
 import static wei.mark.standout.ui.Window.WindowDataKeys.HEIGHT_BEFORE_MAXIMIZE;
 import static wei.mark.standout.ui.Window.WindowDataKeys.IS_MAXIMIZED;
@@ -61,8 +60,6 @@ public class QuickTranslate extends StandOutWindow implements View.OnTouchListen
     private ViewPager mViewPager;
     private CustomPagerAdapter mCustomPagerAdapter;
 
-    private DatabaseAccess databaseAccess;
-    private SaveDB mSaveDB;
     private ArrayList<String> wordNameArr = new ArrayList<>();
     private CustomACQuickAdapter customACQuickAdapter;
     private GetDataTask getDataTask;
@@ -93,11 +90,6 @@ public class QuickTranslate extends StandOutWindow implements View.OnTouchListen
     public void createAndAttachView(final int id, FrameLayout frame) {
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.quick_translate, frame, true);
-
-        databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
-        databaseAccess.open();
-        mSaveDB = new SaveDB(this);
-        mSaveDB.open();
 
         createFloatingIcon();
         currentId = id;
@@ -182,7 +174,7 @@ public class QuickTranslate extends StandOutWindow implements View.OnTouchListen
                 if (mAutoCompleteTextView.getText().length() > 0) {
                     customACQuickAdapter.isNeedToChange = false;
                 } else {
-                    mListHistoryWord = mSaveDB.getHistoryWord(10);
+                    mListHistoryWord = getDictionaryDB().getHistoryWord(10);
                     if (mListHistoryWord.size() > 0) {
                         customACQuickAdapter.setNewData(mListHistoryWord);
                         customACQuickAdapter.isNeedToChange = true;
@@ -199,7 +191,7 @@ public class QuickTranslate extends StandOutWindow implements View.OnTouchListen
             @Override
             public void onClick(View view) {
                 if (mAutoCompleteTextView.getText().toString().matches("")) {
-                    mListHistoryWord = mSaveDB.getHistoryWord(10);
+                    mListHistoryWord = getDictionaryDB().getHistoryWord(10);
                     if (mListHistoryWord.size() > 0) {
                         customACQuickAdapter.setNewData(mListHistoryWord);
                         customACQuickAdapter.isNeedToChange = true;
@@ -217,10 +209,10 @@ public class QuickTranslate extends StandOutWindow implements View.OnTouchListen
     @Override
     public void openWord(String wordName) {
         mAutoCompleteTextView.setText(wordName);
-        Word word = databaseAccess.getWord(wordName);
+        Word word = getEngVietDbAccess().getWord(wordName);
         mCustomPagerAdapter.setEnViDetails(HtmlUtils.format(word).toString());
         mCustomPagerAdapter.notifyDataSetChanged();
-        mSaveDB.addHistoryWord(this, wordName);
+        getDictionaryDB().addHistoryWord(this, wordName);
         addToStack(wordName);
         new Handler().post(new Runnable() {
             public void run() {
@@ -404,7 +396,7 @@ public class QuickTranslate extends StandOutWindow implements View.OnTouchListen
 
         @Override
         protected Integer doInBackground(String... strings) {
-            wordNameArr = databaseAccess.getWordNames(strings[0], 10);
+            wordNameArr = getEngVietDbAccess().getWordNames(strings[0], 10);
             return null;
         }
 
