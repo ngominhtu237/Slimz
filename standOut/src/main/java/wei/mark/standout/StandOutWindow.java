@@ -7,15 +7,19 @@ import java.util.Set;
 
 import wei.mark.standout.constants.StandOutFlags;
 import wei.mark.standout.ui.Window;
+import android.annotation.SuppressLint;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -116,7 +120,11 @@ public abstract class StandOutWindow extends Service {
 	 */
 	public static void show(Context context,
 			Class<? extends StandOutWindow> cls, int id) {
-		context.startService(getShowIntent(context, cls, id));
+		if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			context.startForegroundService(getShowIntent(context, cls, id));
+		} else {
+			context.startService(getShowIntent(context, cls, id));
+		}
 	}
 
 	/**
@@ -655,10 +663,43 @@ public abstract class StandOutWindow extends Service {
 					PendingIntent.FLAG_UPDATE_CURRENT);
 		}
 
-		Notification notification = new Notification(icon, tickerText, when);
-		notification.setLatestEventInfo(c, contentTitle, contentText,
-				contentIntent);
+//		Notification notification = new Notification(icon, tickerText, when);
+//		notification.setLatestEventInfo(c, contentTitle, contentText,
+//				contentIntent);
+		Notification notification;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+			notification = createNotification();
+		else {
+			Notification.Builder builder = new Notification.Builder(this)
+					.setOngoing(true)
+					.setSmallIcon(icon)
+					.setTicker(tickerText);
+			notification = builder.build();
+		}
+
 		return notification;
+	}
+
+	private Notification createNotification(){
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+			String NOTIFICATION_CHANNEL_ID = "com.samsung.lookup";
+			String channelName = "My Background Service";
+			NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
+			chan.setLightColor(Color.BLUE);
+			chan.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+			NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+			assert manager != null;
+			manager.createNotificationChannel(chan);
+
+			Notification.Builder notificationBuilder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID);
+			@SuppressLint("WrongConstant") Notification notification = notificationBuilder.setOngoing(true)
+					.setContentTitle("App is running in background")
+					.setPriority(NotificationManager.IMPORTANCE_MIN)
+					.setCategory(Notification.CATEGORY_SERVICE)
+					.build();
+			return notification;
+		}
+		return null;
 	}
 
 	/**
@@ -699,10 +740,14 @@ public abstract class StandOutWindow extends Service {
 					PendingIntent.FLAG_UPDATE_CURRENT);
 		}
 
-		Notification notification = new Notification(icon, tickerText, when);
-		notification.setLatestEventInfo(c, contentTitle, contentText,
-				contentIntent);
-		return notification;
+		Notification.Builder builder = new Notification.Builder(this)
+				.setOngoing(true)
+				.setSmallIcon(icon)
+				.setTicker(tickerText);
+		if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			builder.setTimeoutAfter(when);
+		}
+		return builder.build();
 	}
 
 	/**
@@ -1811,7 +1856,7 @@ public abstract class StandOutWindow extends Service {
 		 *            The id of the window.
 		 */
 		public StandOutLayoutParams(int id) {
-			super(200, 200, TYPE_PHONE,
+			super(200, 200, Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ?TYPE_APPLICATION_OVERLAY : TYPE_PHONE,
 					StandOutLayoutParams.FLAG_NOT_TOUCH_MODAL
 							| StandOutLayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
 					PixelFormat.TRANSLUCENT);
